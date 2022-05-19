@@ -13,8 +13,11 @@ This application has been being developed using the best way and technic. N-laye
 </br>
 </br>
 As seen, the most important two things all the process. </br>
-**Scalability** </br>
-**Readability** </br>
+
+**Scalability** 
+
+**Readability** 
+
 </br>
 </br>
 
