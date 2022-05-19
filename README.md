@@ -2,7 +2,9 @@
 #### BiLet's Go Backend Web API Application
 
 </br>
+
 ###### About BiLet's GO
+
 Aims of "BileLet's Go" to sell concert, theater and cinema tickets on online. You can buy easily and safely to tickets on Mobile and Web app clients which developed using Android SDK - Kotlin and React
 </br>
 
@@ -15,7 +17,6 @@ This application has been being developed using the best way and technic. N-laye
 As seen, the most important two things all the process. </br>
 
 **Scalability** 
-
 **Readability** 
 
 </br>
