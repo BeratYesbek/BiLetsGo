@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core.DataAccess
 {
-    public class EntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity>
+    public class EfEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity>
     where TEntity : class, IEntity, new()
     where TContext : DbContext, new()
     {

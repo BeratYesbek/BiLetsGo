@@ -8,7 +8,7 @@ using Castle.DynamicProxy;
 
 namespace Core.Utilities.Interceptors
 {
-    internal class AspectInterceptorSelector : IInterceptorSelector
+    public class AspectInterceptorSelector : IInterceptorSelector
     {
         public IInterceptor[] SelectInterceptors(Type type, MethodInfo method, IInterceptor[] interceptors)
         {

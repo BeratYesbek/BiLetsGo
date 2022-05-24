@@ -9,7 +9,7 @@ using Entity.Concretes;
 
 namespace DataAccess.Concretes
 {
-    public class EfCategoryDal : EntityRepositoryBase<Category,AppDbContext>,ICategoryDal
+    public class EfCategoryDal : EfEntityRepositoryBase<Category,AppDbContext>,ICategoryDal
     {
     }
 }

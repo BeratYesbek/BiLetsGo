@@ -1,3 +1,6 @@
+using Core.DependencyResolver;
+using Core.Extensions;
+using Core.Utilities.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +35,11 @@ namespace WebAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
             });
+            0,,
+            services.AddDependencyResolvers(new ICoreModule[]
+        {
+                new CoreModule()
+        });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
