@@ -1,7 +1,10 @@
 ﻿using Business.Abstracts;
+using DataAccess;
 using Entity.Concretes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -76,6 +79,12 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-       
+        [HttpGet("/getAllData")]
+        public IActionResult GetAllData()
+        {
+            var data = new AppDbContext().Salons.ToList();
+            var data2 = new AppDbContext().Set<Salon>().Include(t => t.Seats).ToList();;
+            return Ok(data2);
+        }
     }
 }

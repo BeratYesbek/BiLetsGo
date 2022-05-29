@@ -1,7 +1,10 @@
-﻿using Business.Abstracts;
+﻿using AutoMapper;
+using Business.Abstracts;
 using Entity.Concretes;
+using Entity.Concretes.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
@@ -9,32 +12,37 @@ namespace WebAPI.Controllers
     [ApiController]
     public class TicketsController : ControllerBase
     {
+        private readonly IMapper _mapper;
         private readonly ITicketService _ticketService;
-        public TicketsController(ITicketService ticketService)
+        public TicketsController(ITicketService ticketService, IMapper mapper)
         {
             _ticketService = ticketService;
+            _mapper = mapper;
         }
         [HttpPost("add")]
-        public IActionResult Add(Ticket ticket)
+        public async Task<IActionResult> Add(TicketCreateDto ticketCreateDto)
         {
-            var result = _ticketService.Add(ticket);
+            var ticket = _mapper.Map<Ticket>(ticketCreateDto);
+            var ticketfile = _mapper.Map<TicketFile>(ticketCreateDto);
+            var result = await _ticketService.Add(ticket, ticketfile);
+
             if (result.Success)
             {
                 return Ok(result);
             }
-
             return BadRequest(result);
         }
 
         [HttpPut("update")]
-        public IActionResult Update(Ticket ticket)
+        public async Task<IActionResult> Update(TicketUpdateDto ticketUpdateDto)
         {
-            var result = _ticketService.Update(ticket);
+            var ticket = _mapper.Map<Ticket>(ticketUpdateDto);
+            var ticketfile = _mapper.Map<TicketFile>(ticketUpdateDto);
+            var result = await _ticketService.Update(ticket, ticketfile);
             if (result.Success)
             {
                 return Ok(result);
             }
-
             return BadRequest(result);
         }
 
@@ -46,7 +54,6 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
-
             return BadRequest(result);
         }
 
@@ -60,7 +67,7 @@ namespace WebAPI.Controllers
             }
 
             return BadRequest(result);
-            
+
         }
 
         [HttpGet("getAll")]

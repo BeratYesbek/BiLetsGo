@@ -2,11 +2,9 @@
 using Core.Utilities.Result;
 using DataAccess.Abstracts;
 using Entity.Concretes;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Business.Concretes
 {
@@ -34,7 +32,8 @@ namespace Business.Concretes
 
         public IDataResult<List<Salon>> GetAll()
         {
-           return new SuccessDataResult<List<Salon>>(_salonDal.GetAll());    
+        
+           return new SuccessDataResult<List<Salon>>(_salonDal.GetAllIncluded(t => t.Seats,t => t.Tickets));    
         }
 
         public IDataResult<Salon> GetById(int id) 

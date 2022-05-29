@@ -70,11 +70,25 @@ namespace Core.DataAccess
         {
             using (TContext context = new TContext())
             {
-                var result = filter == null 
-                    ? context.Set<TEntity>().ToList()
-                    : context.Set<TEntity>().Where(filter).ToList();
-                return result;
+        
+             var result = filter == null
+              ? context.Set<TEntity>().ToList()
+              : context.Set<TEntity>().Where(filter).ToList();
+              return result;
+            }
+        }
 
+        public List<TEntity> GetAllIncluded(params Expression<Func<TEntity, object>>[] including)
+        {
+            using (TContext context = new TContext())
+            {
+
+                var include = context.Set<TEntity>().AsQueryable();
+                including.ToList().ForEach(item =>
+                {
+                    include = include.Include(item);
+                });
+                return include.ToList();
             }
         }
     }

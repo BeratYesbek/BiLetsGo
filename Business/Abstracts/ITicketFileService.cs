@@ -19,5 +19,6 @@ namespace Business.Abstracts
         IDataResult<TicketFile> GetById(int id);
 
         IDataResult<List<TicketFile>> GetAll(int ticketId);
+
     }
 }

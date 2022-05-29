@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Abstracts;
+using Core.Utilities.FileHelper;
 using Core.Utilities.Result;
 using DataAccess.Abstracts;
 using Entity.Concretes;
@@ -13,23 +14,59 @@ namespace Business.Concretes
     public class TicketManager : ITicketService
     {
         private readonly ITicketDal _ticketDal;
-        public TicketManager(ITicketDal ticketDal)
+        private readonly ITicketFileService _ticketFileService;
+        public TicketManager(ITicketDal ticketDal,ITicketFileService ticketFileService)
         {
             _ticketDal = ticketDal;
+            _ticketFileService = ticketFileService;
         }
 
-        public IDataResult<Ticket> Add(Ticket ticket)
+        public async Task<IDataResult<Ticket>> Add(Ticket ticket,TicketFile files)
         {
-            var data = _ticketDal.Add(ticket);
-            if (data is not null)
+            var result = _ticketDal.Add(ticket);
+            foreach(var file in files.Files)
             {
-                return new SuccessDataResult<Ticket>(data);
+                var fileHelper = new FileHelper(RecordType.Cloud, FileExtension.ImageExtension);
+                var fileResult = await fileHelper.UploadAsync(file);
+                if (fileResult.Success)
+                {
+                    var resultImage = _ticketFileService.Add(new TicketFile
+                    {
+                        ImagePath = fileResult.Message.Split("&&")[0],
+                        PublicId = fileResult.Message.Split("&&")[1],
+                        TicketId = result.Id
+                    });
+                    if (!resultImage.Success)
+                    {
+                        return new ErrorDataResult<Ticket>(null);
+                    }
+                }
             }
-            return new ErrorDataResult<Ticket>(null);
+            return new SuccessDataResult<Ticket>(result);
         }
 
-        public IResult Update(Ticket ticket)
+        public async Task<IResult> Update(Ticket ticket,TicketFile ticketFile)
         {
+            if(ticketFile.Files is not null &&  ticketFile.Files.Count() > 0)
+            {
+                var image = _ticketFileService.GetAll(ticketFile.Id);
+                var fileHelper = new FileHelper(RecordType.Cloud, FileExtension.ImageExtension);
+                for (int i =0; i < ticketFile.Files.Count(); i++)
+                {
+                    var fileResult = await fileHelper.UpdateAsync(ticketFile.Files[i], image.Data[i].ImagePath, image.Data[i].PublicId);
+                    var result = _ticketFileService.Update(new TicketFile
+                    {
+                        ImagePath = fileResult.Message.Split("&&")[0],
+                        PublicId = fileResult.Message.Split("&&")[1],
+                        TicketId = ticket.Id,
+                        Id = image.Data[i].Id
+                    });
+                    if (!result.Success)
+                    {
+                        return new ErrorResult();
+                    }
+                }
+            }
             _ticketDal.Update(ticket);
             return new SuccessResult();
         }

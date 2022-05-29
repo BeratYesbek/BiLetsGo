@@ -17,8 +17,10 @@ namespace Core.DataAccess
 
         void Delete(T entity);
 
-        T Get(Expression<Func<T,bool>> filter);
+        T Get(Expression<Func<T, bool>> filter);
 
         List<T> GetAll(Expression<Func<T, bool>> filter = null);
+
+        List<T> GetAllIncluded(params Expression<Func<T, object>>[] including);
     }
 }

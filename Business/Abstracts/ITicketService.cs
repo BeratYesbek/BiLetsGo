@@ -10,9 +10,9 @@ namespace Business.Abstracts
 {
     public interface ITicketService
     {
-        IDataResult<Ticket> Add(Ticket ticket);
+        Task<IDataResult<Ticket>> Add(Ticket ticket,TicketFile file);
 
-        IResult Update(Ticket ticket);
+        Task<IResult> Update(Ticket ticket,TicketFile file);
 
         IResult Delete(Ticket ticket);
 

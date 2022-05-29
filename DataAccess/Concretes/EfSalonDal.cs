@@ -7,5 +7,6 @@ namespace DataAccess.Concretes
 {
     public class EfSalonDal : EfEntityRepositoryBase<Salon,AppDbContext>,ISalonDal
     {
+
     }
 }

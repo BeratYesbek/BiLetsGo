@@ -1,16 +1,14 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Core.Entities;
 
-namespace Entity.Concretes
+namespace Entity.Concretes.Dto
 {
-    public class Ticket : IEntity
+    public class TicketUpdateDto
     {
-        [Key]
         public int Id { get; set; }
 
         public string Title { get; set; }
@@ -18,8 +16,6 @@ namespace Entity.Concretes
         public string Description { get; set; }
 
         public int CategoryId { get; set; }
-
-        public int SalonId { get; set; }
 
         public bool Status { get; set; }
 
@@ -29,10 +25,6 @@ namespace Entity.Concretes
 
         public DateTime EventFinishedDate { get; set; }
 
-        public virtual  Category Category { get; set; }
-
-        public virtual Salon Salon { get; set; }
-
-        public virtual ICollection<TicketFile> TicketFiles { get; set; }
+        public IFormFile[] Files { get; set; }
     }
 }
