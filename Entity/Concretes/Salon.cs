@@ -20,23 +20,11 @@ namespace Entity.Concretes
 
         private ICollection<Seat> _Seats;
 
-  /*      public virtual ICollection<Seat> Seats
-        {
-            get 
-            {
-                Name = "BOŞŞŞŞŞŞŞŞŞŞŞŞ";
-                return _Seats;
-                  
-            } 
-            set 
-            { 
-                _Seats = value;
-            } 
-        }*/
+        public virtual ICollection<Seat> Seats { get; set; }
 
         public virtual ICollection<Ticket> Tickets { get; set; }
 
-        
-        
+
+
     }
 }

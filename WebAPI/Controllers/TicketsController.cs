@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
             _mapper = mapper;
         }
         [HttpPost("add")]
-        public async Task<IActionResult> Add(TicketCreateDto ticketCreateDto)
+        public async Task<IActionResult> Add([FromForm] TicketCreateDto ticketCreateDto)
         {
             var ticket = _mapper.Map<Ticket>(ticketCreateDto);
             var ticketfile = _mapper.Map<TicketFile>(ticketCreateDto);
@@ -34,7 +34,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("update")]
-        public async Task<IActionResult> Update(TicketUpdateDto ticketUpdateDto)
+        public async Task<IActionResult> Update([FromForm] TicketUpdateDto ticketUpdateDto)
         {
             var ticket = _mapper.Map<Ticket>(ticketUpdateDto);
             var ticketfile = _mapper.Map<TicketFile>(ticketUpdateDto);

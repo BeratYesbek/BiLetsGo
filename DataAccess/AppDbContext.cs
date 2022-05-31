@@ -13,7 +13,7 @@ namespace DataAccess
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseLazyLoadingProxies()//.ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.DetachedLazyLoadingWarning))
+            optionsBuilder.UseLazyLoadingProxies(false)
             .UseNpgsql("Server=localhost;Database=BiletsgoDB;Port=5432;Username=postgres;Password=123456");
         }
 
@@ -32,5 +32,7 @@ namespace DataAccess
         public DbSet<Category> Categories { get; set; }
         public DbSet<Seat> Seats { get; set; }
         public DbSet<Salon> Salons { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
     }
 }

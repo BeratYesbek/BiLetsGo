@@ -21,6 +21,8 @@ namespace Entity.Concretes
 
         public int SalonId { get; set; }
 
+        public int Quantity { get; set; }
+
         public bool Status { get; set; }
 
         public DateTime Created { get; set; } = DateTime.Now;

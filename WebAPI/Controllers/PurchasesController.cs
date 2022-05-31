@@ -1,27 +1,26 @@
 ﻿using Business.Abstracts;
-using DataAccess;
 using Entity.Concretes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SalonsController : ControllerBase
+    public class PurchasesController : ControllerBase
     {
-        private readonly ISalonService _salonService;
-        public SalonsController(ISalonService salonService)
+        private readonly IPurchaseService _purchaseService;
+
+        public PurchasesController(IPurchaseService purchaseService)
         {
-            _salonService = salonService;
+            _purchaseService = purchaseService; 
         }
 
+
         [HttpPost("add")]
-        public IActionResult Add(Salon salon)
+        public IActionResult Add(Purchase purchase)
         {
-            var result = _salonService.Add(salon);
+            var result = _purchaseService.Add(purchase);
             if (result.Success)
             {
                 return Ok(result);
@@ -31,9 +30,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Update(Salon salon)
+        public IActionResult Update(Purchase purchase)
         {
-            var result = _salonService.Update(salon);
+            var result = _purchaseService.Update(purchase);
             if (result.Success)
             {
                 return Ok(result);
@@ -43,9 +42,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("delete")]
-        public IActionResult Delete(Salon salon)
+        public IActionResult Delete(Purchase purchase)
         {
-            var result = _salonService.Delete(salon);
+            var result = _purchaseService.Delete(purchase);
             if (result.Success)
             {
                 return Ok(result);
@@ -57,7 +56,7 @@ namespace WebAPI.Controllers
         [HttpGet("getById{id}")]
         public IActionResult GetById(int id)
         {
-            var result = _salonService.GetById(id);
+            var result = _purchaseService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -70,7 +69,7 @@ namespace WebAPI.Controllers
         [HttpGet("getAll")]
         public IActionResult GetAll()
         {
-            var result = _salonService.GetAll();
+            var result = _purchaseService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -78,7 +77,5 @@ namespace WebAPI.Controllers
 
             return BadRequest(result);
         }
-
-    
     }
 }
