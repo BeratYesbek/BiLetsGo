@@ -1,0 +1,34 @@
+version: '3'
+services:
+  web:
+    container_name: 'nervio_back'
+    image: 'nervio_back'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:80'
+    depends_on:
+      - 'postgres'
+    networks:
+      - nervio-network
+
+  postgres:
+    ports:
+      - '5432:5432'
+    container_name: accman-postgresql
+    environment:
+      - POSTGRES_DB=AppTestDb
+      - POSTGRES_PASSWORD=123456
+    volumes:
+      - 'nervio-postgresql-volume:/var/lib/postgresql/data'
+    image: 'postgres'
+    networks:
+      - nervio-network
+
+volumes:
+  nervio-postgresql-volume:
+
+networks:
+  nervio-network:
+    driver: bridge
