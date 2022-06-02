@@ -18,6 +18,5 @@ namespace Entity.Concretes
 
         public int SalonId { get; set; }
 
-        public virtual Salon Salon { get; set; }
     }
 }

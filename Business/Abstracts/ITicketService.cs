@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Utilities.Result;
 using Entity.Concretes;
+using Entity.Concretes.Dto;
 
 namespace Business.Abstracts
 {
@@ -19,5 +20,8 @@ namespace Business.Abstracts
         IDataResult<Ticket> GetById(int id);
 
         IDataResult<List<Ticket>> GetAll();
+
+        IDataResult<List<TicketReadDto>> GetAllDetails();
+
     }
 }

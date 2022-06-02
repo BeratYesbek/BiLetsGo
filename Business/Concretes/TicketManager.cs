@@ -8,6 +8,7 @@ using Core.Utilities.FileHelper;
 using Core.Utilities.Result;
 using DataAccess.Abstracts;
 using Entity.Concretes;
+using Entity.Concretes.Dto;
 
 namespace Business.Concretes
 {
@@ -97,6 +98,12 @@ namespace Business.Concretes
             }
 
             return new ErrorDataResult<List<Ticket>>(null);
+        }
+
+        public IDataResult<List<TicketReadDto>> GetAllDetails()
+        {
+            return new SuccessDataResult<List<TicketReadDto>>(_ticketDal.GetAllDetails());
+
         }
     }
 }

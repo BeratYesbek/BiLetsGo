@@ -30,11 +30,5 @@ namespace Entity.Concretes
         public DateTime EventStartedDate { get; set; }
 
         public DateTime EventFinishedDate { get; set; }
-
-        public virtual  Category Category { get; set; }
-
-        public virtual Salon Salon { get; set; }
-
-        public virtual ICollection<TicketFile> TicketFiles { get; set; }
     }
 }

@@ -33,7 +33,7 @@ namespace Business.Concretes
         public IDataResult<List<Salon>> GetAll()
         {
         
-           return new SuccessDataResult<List<Salon>>(_salonDal.GetAllIncluded(t => t.Seats,t => t.Tickets));    
+           return new SuccessDataResult<List<Salon>>(_salonDal.GetAll());    
         }
 
         public IDataResult<Salon> GetById(int id) 

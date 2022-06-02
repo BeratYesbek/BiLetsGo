@@ -15,6 +15,5 @@ namespace Entity.Concretes
 
         public string Name { get; set; }
 
-        public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }

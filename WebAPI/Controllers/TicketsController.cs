@@ -81,5 +81,17 @@ namespace WebAPI.Controllers
 
             return BadRequest(result);
         }
+
+        [HttpGet("getAllDetails")]
+        public IActionResult GetAllDetails()
+        {
+            var result = _ticketService.GetAllDetails();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
     }
 }

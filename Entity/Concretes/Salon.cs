@@ -18,12 +18,6 @@ namespace Entity.Concretes
 
         public string SalonNumber { get; set; }
 
-        private ICollection<Seat> _Seats;
-
-        public virtual ICollection<Seat> Seats { get; set; }
-
-        public virtual ICollection<Ticket> Tickets { get; set; }
-
 
 
     }
