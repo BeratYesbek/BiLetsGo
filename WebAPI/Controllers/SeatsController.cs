@@ -75,10 +75,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("GetBySeatId/{seatId}")]
-        public IActionResult GetBySeatId(int seatId)
+        [HttpGet("getBySalonId/{salonId}")]
+        public IActionResult GetBySeatId(int salonId)
         {
-            var result = _seatService.GetBySalonId(seatId);
+            var result = _seatService.GetBySalonId(salonId);
             if (result.Success)
             {
                 return Ok(result);

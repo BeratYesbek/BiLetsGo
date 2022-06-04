@@ -23,5 +23,8 @@ namespace Business.Abstracts
 
         IDataResult<List<TicketReadDto>> GetAllDetails();
 
+        IDataResult<TicketReadDto> GetTicketDetailById(int id);
+
+
     }
 }

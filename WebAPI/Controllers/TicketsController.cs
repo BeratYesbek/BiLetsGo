@@ -93,5 +93,18 @@ namespace WebAPI.Controllers
 
             return BadRequest(result);
         }
+
+
+        [HttpGet("getTicketDetailById/{ticketID}")]
+        public IActionResult GetTicketDetailById(int ticketID)
+        {
+            var result = _ticketService.GetTicketDetailById(ticketID);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
     }
 }

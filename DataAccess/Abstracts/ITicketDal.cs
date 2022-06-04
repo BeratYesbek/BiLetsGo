@@ -13,5 +13,8 @@ namespace DataAccess.Abstracts
     public interface ITicketDal : IEntityRepository<Ticket>
     {
         List<TicketReadDto> GetAllDetails(Expression<Func<Ticket,bool>> filter = null);
+
+        TicketReadDto GetTicketDetailById(Expression<Func<Ticket, bool>> filter);
+
     }
 }

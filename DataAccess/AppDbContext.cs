@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entity;
 using Entity.Concretes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -33,5 +34,7 @@ namespace DataAccess
         public DbSet<Salon> Salons { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
+        public DbSet<BookedSeat> BookedSeats { get; set; }
+
     }
 }

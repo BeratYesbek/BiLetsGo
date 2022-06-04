@@ -18,6 +18,16 @@ namespace Business.DependencyResolvers.Autofac
         {
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
+
+            builder.RegisterType<BookedSeatManager>().As<IBookedSeatService>().SingleInstance();
+            builder.RegisterType<EfBookedSeatDal>().As<IBookedSeatDal>().SingleInstance();
+
+            builder.RegisterType<PurchaseManager>().As<IPurchaseService>().SingleInstance();
+            builder.RegisterType<EfPurchaseDal>().As<IPurchaseDal>().SingleInstance();
+
+            builder.RegisterType<PaymentManager>().As<IPaymentService>().SingleInstance();
+            builder.RegisterType<EfPaymentDal>().As<IPaymentDal>().SingleInstance();
+
             builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
             builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
 

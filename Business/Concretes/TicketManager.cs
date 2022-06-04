@@ -105,5 +105,10 @@ namespace Business.Concretes
             return new SuccessDataResult<List<TicketReadDto>>(_ticketDal.GetAllDetails());
 
         }
+
+        public IDataResult<TicketReadDto> GetTicketDetailById(int id)
+        {
+            return new SuccessDataResult<TicketReadDto>(_ticketDal.GetTicketDetailById(t => t.Id == id));
+        }
     }
 }
