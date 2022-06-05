@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Result;
 using Entity.Concretes;
+using Entity.Concretes.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,5 +20,7 @@ namespace Business.Abstracts
         IDataResult<Purchase> GetById(int id);
 
         IDataResult<List<Purchase>> GetAll();
+
+        IDataResult<List<TicketOrderDto>> GetByUserId(int userId);
     }
 }

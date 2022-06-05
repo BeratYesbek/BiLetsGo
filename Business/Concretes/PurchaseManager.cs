@@ -2,6 +2,7 @@
 using Core.Utilities.Result;
 using DataAccess.Abstracts;
 using Entity.Concretes;
+using Entity.Concretes.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,12 @@ namespace Business.Concretes
     public class PurchaseManager : IPurchaseService
     {
         private readonly IPurchaseDal _purchaseDal;
+        private readonly IBookedSeatService _bookedSeatService;
 
-        public PurchaseManager(IPurchaseDal purchaseDal)
+        public PurchaseManager(IPurchaseDal purchaseDal,IBookedSeatService bookedSeatService)
         {
             _purchaseDal = purchaseDal;
+            _bookedSeatService = bookedSeatService;
         }
 
         public IDataResult<Purchase> Add(Purchase purchase)
@@ -28,6 +31,9 @@ namespace Business.Concretes
         public IResult Delete(Purchase purchase)
         {
             _purchaseDal.Delete(purchase);
+            var data = _bookedSeatService.GetByPurchaseId(purchase.Id).Data;
+            _bookedSeatService.Delete(data);
+
             return new SuccessResult();
         }
 
@@ -47,6 +53,12 @@ namespace Business.Concretes
             if (data is not null)
                 return new SuccessDataResult<Purchase>(data);
             return new ErrorDataResult<Purchase>(data);
+        }
+
+        public IDataResult<List<TicketOrderDto>> GetByUserId(int userId)
+        {
+            return new SuccessDataResult<List<TicketOrderDto>>(_purchaseDal.GetByUserId(userId));
+
         }
 
         public IResult Update(Purchase purchase)

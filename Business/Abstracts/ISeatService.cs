@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Result;
 using Entity.Concretes;
+using Entity.Concretes.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Business.Abstracts
 
         IDataResult<Seat> GetById(int id);
 
-        IDataResult<List<Seat>> GetBySalonId(int salonId);   
+        IDataResult<List<SeatDto>> GetBySalonId(int salonId);   
 
         IDataResult<List<Seat>> GetAll();
     }

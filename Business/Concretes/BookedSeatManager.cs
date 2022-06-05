@@ -14,6 +14,12 @@ namespace Business.Concretes
     {
         private readonly IBookedSeatDal _bookedSeatDal;
 
+
+        public BookedSeatManager(IBookedSeatDal bookedSeatDal)
+        {
+            _bookedSeatDal = bookedSeatDal;
+        }
+
         public IDataResult<BookedSeat> Add(BookedSeat seat)
         {
             return new SuccessDataResult<BookedSeat>(_bookedSeatDal.Add(seat));
@@ -33,6 +39,11 @@ namespace Business.Concretes
         public IDataResult<BookedSeat> GetById(int id)
         {
             return new SuccessDataResult<BookedSeat>(_bookedSeatDal.Get(t => t.Id == id));
+        }
+
+        public IDataResult<BookedSeat> GetByPurchaseId(int purchaseID)
+        {
+            return new SuccessDataResult<BookedSeat>(_bookedSeatDal.Get(t => t.PurchaseId == purchaseID));
         }
 
         public IResult Update(BookedSeat seat)

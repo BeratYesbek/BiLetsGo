@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Entities.Concretes;
+using Core.Entity.Concretes;
 using Entity;
 using Entity.Concretes;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +37,11 @@ namespace DataAccess
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<BookedSeat> BookedSeats { get; set; }
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+
 
     }
 }

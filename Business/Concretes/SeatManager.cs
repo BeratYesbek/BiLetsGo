@@ -2,6 +2,7 @@
 using Core.Utilities.Result;
 using DataAccess.Abstracts;
 using Entity.Concretes;
+using Entity.Concretes.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,9 +44,9 @@ namespace Business.Concretes
             return new SuccessDataResult<Seat>(_seatDal.Get(t => t.Id == id));
         }
 
-        public IDataResult<List<Seat>> GetBySalonId(int salonId)
+        public IDataResult<List<SeatDto>> GetBySalonId(int salonId)
         {
-            return new SuccessDataResult<List<Seat>>(_seatDal.GetAll(t => t.SalonId == salonId));
+            return new SuccessDataResult<List<SeatDto>>(_seatDal.GetAllBySalonID(t => t.SalonId == salonId));
         }
 
         public IResult Update(Seat seat)

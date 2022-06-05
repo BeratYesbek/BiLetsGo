@@ -18,7 +18,7 @@ namespace Core.Entities.Concretes
 
         public byte[] PasswordSalt { get; set; }
 
-        public bool EmailConfirmed { get; set; }
+        public bool EmailConfirmed { get; set; } = false;
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
     }

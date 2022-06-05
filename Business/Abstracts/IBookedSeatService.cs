@@ -18,6 +18,9 @@ namespace Business.Abstracts
 
         IDataResult<BookedSeat> GetById(int id);
 
+        IDataResult<BookedSeat> GetByPurchaseId(int purchaseID);
+
+
         IDataResult<List<BookedSeat>> GetAll();
     }
 }

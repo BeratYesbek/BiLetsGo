@@ -1,26 +1,25 @@
 ﻿using Business.Abstracts;
-using Entity.Concretes;
+using Core.Entity.Concretes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebAPI.Controllers
+namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PurchasesController : ControllerBase
+    public class OperationClaimsController : ControllerBase
     {
-        private readonly IPurchaseService _purchaseService;
+        private readonly IOperationClaimService _operationClaimService;
 
-        public PurchasesController(IPurchaseService purchaseService)
+        public OperationClaimsController(IOperationClaimService operationClaimService)
         {
-            _purchaseService = purchaseService; 
+            _operationClaimService = operationClaimService;
         }
 
-
         [HttpPost("add")]
-        public IActionResult Add(Purchase purchase)
+        public IActionResult Add(OperationClaim operationClaim)
         {
-            var result = _purchaseService.Add(purchase);
+            var result = _operationClaimService.Add(operationClaim);
             if (result.Success)
             {
                 return Ok(result);
@@ -30,9 +29,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Update(Purchase purchase)
+        public IActionResult Update(OperationClaim operationClaim)
         {
-            var result = _purchaseService.Update(purchase);
+            var result = _operationClaimService.Update(operationClaim);
             if (result.Success)
             {
                 return Ok(result);
@@ -41,10 +40,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("delete")]
-        public IActionResult Delete(Purchase purchase)
+        [HttpDelete("delete")]
+        public IActionResult Delete(OperationClaim operationClaim)
         {
-            var result = _purchaseService.Delete(purchase);
+            var result = _operationClaimService.Delete(operationClaim);
             if (result.Success)
             {
                 return Ok(result);
@@ -53,35 +52,21 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getById{id}")]
+        [HttpGet("getById/{id}")]
         public IActionResult GetById(int id)
         {
-            var result = _purchaseService.GetById(id);
+            var result = _operationClaimService.Get(id);
             if (result.Success)
             {
                 return Ok(result);
             }
-
             return BadRequest(result);
-            ;
         }
 
         [HttpGet("getAll")]
         public IActionResult GetAll()
         {
-            var result = _purchaseService.GetAll();
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result);
-        }
-
-        [HttpGet("getByUserId/{userId}")]
-        public IActionResult GetByUserId(int userId)
-        {
-            var result = _purchaseService.GetByUserId(userId);
+            var result = _operationClaimService.GetAll();
             if (result.Success)
             {
                 return Ok(result);

@@ -7,6 +7,7 @@ using Business.Abstracts;
 using Business.Concretes;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
+using Core.Utilities.Security.JWT;
 using DataAccess.Abstracts;
 using DataAccess.Concretes;
 
@@ -18,6 +19,14 @@ namespace Business.DependencyResolvers.Autofac
         {
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
+            builder.RegisterType<OperationClaimManager>().As<IOperationClaimService>().SingleInstance();
+            builder.RegisterType<EfOperationClaimDal>().As<IOperationClaimDal>().SingleInstance();
+
+            builder.RegisterType<UserOperationClaimManager>().As<IUserOperationClaimService>().SingleInstance();
+            builder.RegisterType<EfUserOperationClaimDal>().As<IUserOperationClaimDal>().SingleInstance();
+
+            builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
+            builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
 
             builder.RegisterType<BookedSeatManager>().As<IBookedSeatService>().SingleInstance();
             builder.RegisterType<EfBookedSeatDal>().As<IBookedSeatDal>().SingleInstance();
@@ -43,6 +52,8 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<TicketManager>().As<ITicketService>().SingleInstance();
             builder.RegisterType<EfTicketDal>().As<ITicketDal>().SingleInstance();
 
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
+            builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
                 .EnableInterfaceInterceptors(new ProxyGenerationOptions()
