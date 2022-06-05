@@ -16,7 +16,7 @@ namespace DataAccess
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Server=localhost;Database=BiletsgoDB;Port=5432;Username=postgres;Password=123456");
+            optionsBuilder.UseNpgsql("User ID=vthtbiadewikbf;Password=4bb259294737dfa7a32de56981dbde41096d478bd1a6f3d1fe3e3452b9aa8145;Host=ec2-176-34-211-0.eu-west-1.compute.amazonaws.com; Port=5432;Database=d5hr7qpghtjfp6;Pooling=true;SSL Mode=Require;TrustServerCertificate=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
