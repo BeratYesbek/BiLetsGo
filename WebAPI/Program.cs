@@ -26,9 +26,12 @@ namespace WebAPI
                 {
                     builder.RegisterModule(new AutofacBusinessModule());
                 })
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                  .ConfigureWebHostDefaults(webBuilder =>
+                  {
+                      var port = Environment.GetEnvironmentVariable("PORT");
+
+                      webBuilder.UseStartup<Startup>()
+                          .UseUrls("http://*:" + port);
+                  });
     }
 }
