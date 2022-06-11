@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Abstracts;
+using Business.Aspects;
+using Business.Validation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.FileHelper;
 using Core.Utilities.Result;
 using DataAccess.Abstracts;
@@ -22,6 +25,8 @@ namespace Business.Concretes
             _ticketFileService = ticketFileService;
         }
 
+        [ValidationAspect(typeof(TicketValidator))]
+        [SecuredOperation("Admin,SuperAdmin")]
         public async Task<IDataResult<Ticket>> Add(Ticket ticket,TicketFile files)
         {
             var result = _ticketDal.Add(ticket);
@@ -46,6 +51,8 @@ namespace Business.Concretes
             return new SuccessDataResult<Ticket>(result);
         }
 
+        [ValidationAspect(typeof(TicketValidator))]
+        [SecuredOperation("Admin,SuperAdmin")]
         public async Task<IResult> Update(Ticket ticket,TicketFile ticketFile)
         {
             if(ticketFile.Files is not null &&  ticketFile.Files.Count() > 0)
@@ -72,12 +79,13 @@ namespace Business.Concretes
             return new SuccessResult();
         }
 
+        [SecuredOperation("Admin,SuperAdmin")]
         public IResult Delete(Ticket ticket)
         {
             _ticketDal.Delete(ticket);
             return new SuccessResult();
         }
-
+        [SecuredOperation("User,Admin,SuperAdmin")]
         public IDataResult<Ticket> GetById(int id)
         {
             var data = _ticketDal.Get(t => t.Id == id);
@@ -89,6 +97,7 @@ namespace Business.Concretes
             return new ErrorDataResult<Ticket>(null);
         }
 
+        [SecuredOperation("User,Admin,SuperAdmin")]
         public IDataResult<List<Ticket>> GetAll()
         {
             var data = _ticketDal.GetAll();
@@ -100,12 +109,13 @@ namespace Business.Concretes
             return new ErrorDataResult<List<Ticket>>(null);
         }
 
+        [SecuredOperation("User,Admin,SuperAdmin")]
         public IDataResult<List<TicketReadDto>> GetAllDetails()
         {
             return new SuccessDataResult<List<TicketReadDto>>(_ticketDal.GetAllDetails());
 
         }
-
+        [SecuredOperation("User,Admin,SuperAdmin")]
         public IDataResult<TicketReadDto> GetTicketDetailById(int id)
         {
             return new SuccessDataResult<TicketReadDto>(_ticketDal.GetTicketDetailById(t => t.Id == id));

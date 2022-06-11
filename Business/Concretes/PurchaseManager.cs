@@ -1,4 +1,7 @@
 ﻿using Business.Abstracts;
+using Business.Aspects;
+using Business.Validation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Result;
 using DataAccess.Abstracts;
 using Entity.Concretes;
@@ -22,12 +25,15 @@ namespace Business.Concretes
             _bookedSeatService = bookedSeatService;
         }
 
+        [SecuredOperation("User,Admin,SuperAdmin")]
+        [ValidationAspect(typeof(PurchaseValidator))]
         public IDataResult<Purchase> Add(Purchase purchase)
         {
             _purchaseDal.Add(purchase);
             return new SuccessDataResult<Purchase>(purchase);
         }
 
+        [SecuredOperation("User,Admin,SuperAdmin")]
         public IResult Delete(Purchase purchase)
         {
             _purchaseDal.Delete(purchase);
@@ -37,6 +43,7 @@ namespace Business.Concretes
             return new SuccessResult();
         }
 
+        [SecuredOperation("User,Admin,SuperAdmin")]
         public IDataResult<List<Purchase>> GetAll()
         {
             var data = _purchaseDal.GetAll();
@@ -47,6 +54,7 @@ namespace Business.Concretes
             return new ErrorDataResult<List<Purchase>>(data);
         }
 
+        [SecuredOperation("User,Admin,SuperAdmin")]
         public IDataResult<Purchase> GetById(int id)
         {
             var data = _purchaseDal.Get(t => t.Id == id);
@@ -55,12 +63,15 @@ namespace Business.Concretes
             return new ErrorDataResult<Purchase>(data);
         }
 
+        [SecuredOperation("User,Admin,SuperAdmin")]
         public IDataResult<List<TicketOrderDto>> GetByUserId(int userId)
         {
             return new SuccessDataResult<List<TicketOrderDto>>(_purchaseDal.GetByUserId(userId));
 
         }
 
+        [ValidationAspect(typeof(PurchaseValidator))]
+        [SecuredOperation("User,Admin,SuperAdmin")]
         public IResult Update(Purchase purchase)
         {
             _purchaseDal.Update(purchase);

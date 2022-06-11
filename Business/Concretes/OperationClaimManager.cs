@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Abstracts;
+using Business.Aspects;
 using Core.Entity.Concretes;
 using Core.Utilities.Result;
 using DataAccess.Abstracts;
@@ -17,6 +18,8 @@ namespace Business.Concretes
         {
             _operationClaimDal = operationClaimDal;
         }
+
+        [SecuredOperation("SuperAdmin")]
         public IDataResult<OperationClaim> Add(OperationClaim operationClaim)
         {
             var data = _operationClaimDal.Add(operationClaim);
@@ -27,13 +30,13 @@ namespace Business.Concretes
 
             return new ErrorDataResult<OperationClaim>(null);
         }
-
+        [SecuredOperation("SuperAdmin")]
         public IResult Update(OperationClaim operationClaim)
         {
             _operationClaimDal.Update(operationClaim);
             return new SuccessResult();
         }
-
+        [SecuredOperation("SuperAdmin")]
         public IResult Delete(OperationClaim operationClaim)
         {
             _operationClaimDal.Delete(operationClaim);

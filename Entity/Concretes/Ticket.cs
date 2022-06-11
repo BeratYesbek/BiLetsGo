@@ -23,6 +23,8 @@ namespace Entity.Concretes
 
         public int Quantity { get; set; }
 
+        public int Price { get; set; }
+
         public bool Status { get; set; }
 
         public DateTime Created { get; set; } = DateTime.Now;

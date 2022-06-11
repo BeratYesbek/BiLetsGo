@@ -1,4 +1,7 @@
 ﻿using Business.Abstracts;
+using Business.Aspects;
+using Business.Validation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Result;
 using DataAccess.Abstracts;
 using Entity.Concretes;
@@ -20,6 +23,7 @@ namespace Business.Concretes
             _seatDal = seatDal;
         }
 
+        [SecuredOperation("Admin,SuperAdmin")]
         public IDataResult<Seat> Add(Seat seat)
         {
             var data = _seatDal.Add(seat);
@@ -28,27 +32,33 @@ namespace Business.Concretes
             return new ErrorDataResult<Seat>(data);
         }
 
+        [SecuredOperation("Admin,SuperAdmin")]
         public IResult Delete(Seat seat)
         {
             _seatDal.Delete(seat);
             return new SuccessDataResult<Seat>(null);   
         }
 
+        [SecuredOperation("User,Admin,SuperAdmin")]
         public IDataResult<List<Seat>> GetAll()
         {
             return new SuccessDataResult<List<Seat>>(_seatDal.GetAll());
         }
 
+        [SecuredOperation("User,Admin,SuperAdmin")]
         public IDataResult<Seat> GetById(int id)
         {
             return new SuccessDataResult<Seat>(_seatDal.Get(t => t.Id == id));
         }
 
+        [SecuredOperation("User,Admin,SuperAdmin")]
         public IDataResult<List<SeatDto>> GetBySalonId(int salonId)
         {
             return new SuccessDataResult<List<SeatDto>>(_seatDal.GetAllBySalonID(t => t.SalonId == salonId));
         }
 
+        [ValidationAspect(typeof(SeatValidator))]
+        [SecuredOperation("Admin,SuperAdmin")]
         public IResult Update(Seat seat)
         {
             _seatDal.Update(seat);
