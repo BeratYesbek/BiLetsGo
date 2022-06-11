@@ -17,8 +17,8 @@ namespace Business.Validation
             RuleFor(t => t.EventStartedDate).NotEmpty();
             RuleFor(t => t.Title).NotEmpty().Length(10);
             RuleFor(t => t.Description).NotEmpty().Length(50);
-            RuleFor(t => t.Price).NotEmpty().LessThan(0);
-            RuleFor(t => t.Quantity).NotEmpty().LessThan(0);
+            RuleFor(t => t.Price).NotEmpty().GreaterThan(0);
+            RuleFor(t => t.Quantity).NotEmpty().GreaterThan(0);
             RuleFor(t => t.SalonId).NotEmpty();
 
 
