@@ -16,24 +16,40 @@ namespace Business.Concretes
     public class BookedSeatManager : IBookedSeatService
     {
         private readonly IBookedSeatDal _bookedSeatDal;
+        private readonly ITicketService _ticketService;
 
 
-        public BookedSeatManager(IBookedSeatDal bookedSeatDal)
+        public BookedSeatManager(IBookedSeatDal bookedSeatDal,ITicketService ticketService)
         {
             _bookedSeatDal = bookedSeatDal;
+            _ticketService = ticketService;
         }
 
         [ValidationAspect(typeof(BookedSeatValidator))]
         [SecuredOperation("User,Admin,SuperAdmin")]
         public IDataResult<BookedSeat> Add(BookedSeat seat)
         {
-            return new SuccessDataResult<BookedSeat>(_bookedSeatDal.Add(seat));
+            BookedSeat data = null;
+            var result = _ticketService.GetById(seat.TicketId);
+            if (result.Success)
+            {
+                 data = _bookedSeatDal.Add(seat);
+                 result.Data.Quantity = result.Data.Quantity - 1;
+                _ticketService.Update(result.Data,null);
+            }
+            return new SuccessDataResult<BookedSeat>(data);
         }
 
         [SecuredOperation("User,Admin,SuperAdmin")]
         public IResult Delete(BookedSeat seat)
         {
-            _bookedSeatDal.Delete(seat);
+            var result = _ticketService.GetById(seat.TicketId);
+            if (result.Success)
+            {
+                _bookedSeatDal.Delete(seat);
+                result.Data.Quantity = result.Data.Quantity + 1;
+                _ticketService.Update(result.Data, null);
+            }
             return new SuccessResult();
         }
 

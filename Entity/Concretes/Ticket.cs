@@ -23,7 +23,7 @@ namespace Entity.Concretes
 
         public int Quantity { get; set; }
 
-        public int Price { get; set; }
+        public float Price { get; set; }
 
         public bool Status { get; set; }
 
