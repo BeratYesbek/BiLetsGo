@@ -36,7 +36,7 @@ namespace Business.Concretes
                  data = _bookedSeatDal.Add(seat);
                  result.Data.Quantity = result.Data.Quantity - 1;
                 
-                _ticketService.Update(result.Data,null);
+                _ticketService.UpdateQuantity(result.Data);
             }
             return new SuccessDataResult<BookedSeat>(data);
         }
@@ -49,7 +49,7 @@ namespace Business.Concretes
             {
                 _bookedSeatDal.Delete(seat);
                 result.Data.Quantity = result.Data.Quantity + 1;
-                _ticketService.Update(result.Data, null);
+                _ticketService.UpdateQuantity(result.Data);
             }
             return new SuccessResult();
         }
