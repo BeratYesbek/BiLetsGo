@@ -18,6 +18,8 @@ namespace Entity.Concretes.Dto
 
         public bool Status { get; set; }
 
+        public float Price { get; set; }
+
         public DateTime Created { get; set; } = DateTime.Now;
 
         public DateTime EventStartedDate { get; set; }
