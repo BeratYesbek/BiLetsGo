@@ -79,6 +79,12 @@ namespace Business.Concretes
             return new SuccessResult();
         }
 
+        public IResult UpdateQuantity(Ticket ticket)
+        {
+            _ticketDal.Update(ticket);
+            return new SuccessResult();
+        }
+
         [SecuredOperation("Admin,SuperAdmin")]
         public IResult Delete(Ticket ticket)
         {

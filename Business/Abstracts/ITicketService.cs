@@ -15,6 +15,8 @@ namespace Business.Abstracts
 
         Task<IResult> Update(Ticket ticket,TicketFile file);
 
+        IResult UpdateQuantity(Ticket ticket);
+
         IResult Delete(Ticket ticket);
 
         IDataResult<Ticket> GetById(int id);

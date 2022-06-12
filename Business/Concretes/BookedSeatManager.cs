@@ -35,6 +35,7 @@ namespace Business.Concretes
             {
                  data = _bookedSeatDal.Add(seat);
                  result.Data.Quantity = result.Data.Quantity - 1;
+                
                 _ticketService.Update(result.Data,null);
             }
             return new SuccessDataResult<BookedSeat>(data);
