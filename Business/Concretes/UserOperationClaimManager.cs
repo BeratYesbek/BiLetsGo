@@ -1,6 +1,7 @@
 ﻿
 
 using Business.Abstracts;
+using Business.Aspects;
 using Core.Entities.Concretes;
 using Core.Entity.Concretes;
 using Core.Utilities.Result;
@@ -19,6 +20,7 @@ namespace Business.Concretes
             _operationClaimService = operationClaimService;
         }
 
+        [SecuredOperation("SuperAdmin")]
         public IDataResult<UserOperationClaim> Add(UserOperationClaim userOperationClaim)
         {
             _userOperationClaimDal.Add(userOperationClaim);
@@ -26,18 +28,20 @@ namespace Business.Concretes
         }
 
 
+        [SecuredOperation("SuperAdmin")]
         public IResult Update(UserOperationClaim userOperationClaim)
         {
             _userOperationClaimDal.Update(userOperationClaim);
             return new SuccessResult();
         }
 
+        [SecuredOperation("SuperAdmin")]
         public IResult Delete(UserOperationClaim userOperationClaim)
         {
             _userOperationClaimDal.Delete(userOperationClaim);
             return new SuccessResult();
         }
-
+        [SecuredOperation("Admin,SuperAdmin")]
         public IDataResult<UserOperationClaim> Get(int id)
         {
             var data = _userOperationClaimDal.Get(u => u.Id == id);
@@ -49,7 +53,7 @@ namespace Business.Concretes
             return new ErrorDataResult<UserOperationClaim>(null);
         }
 
-
+        [SecuredOperation("Admin,SuperAdmin")]
         public IDataResult<List<UserOperationClaim>> GetAll()
         {
             var data = _userOperationClaimDal.GetAll();
@@ -60,6 +64,7 @@ namespace Business.Concretes
 
             return new ErrorDataResult<List<UserOperationClaim>>(null);
         }
+
 
         public IDataResult<UserOperationClaim> AddDefaultRole(User user)
         {
