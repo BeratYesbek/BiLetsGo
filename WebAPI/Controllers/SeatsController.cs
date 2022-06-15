@@ -90,7 +90,7 @@ namespace WebAPI.Controllers
         [HttpGet("getBySalonId/{salonID}/{ticketID}")]
         public IActionResult GetBySeatId(int salonId,int ticketID)
         {
-            var result = _seatService.GetBySalonId(salonId,ticketID);
+            var result = _seatService.GetBySalonId(salonId);
             if (result.Success)
             {
                 return Ok(result);
