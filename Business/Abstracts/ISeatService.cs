@@ -19,7 +19,10 @@ namespace Business.Abstracts
 
         IDataResult<Seat> GetById(int id);
 
-        IDataResult<List<SeatDto>> GetBySalonId(int salonId);   
+        IDataResult<List<SeatDto>> GetBySalonId(int salonId);
+
+        IDataResult<List<SeatDto>> GetBySalonId(int salonId,int ticketId);
+
 
         IDataResult<List<Seat>> GetAll();
     }

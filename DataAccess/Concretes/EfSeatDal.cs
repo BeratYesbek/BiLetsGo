@@ -23,7 +23,23 @@ namespace DataAccess.Concretes
                                  Id = seat.Id,
                                  SalonId = seat.SalonId,
                                  SeatNumber = seat.SeatNumber,
-                                 IsBooked = (from booked in context.BookedSeats where seat.Id == booked.SeatId select booked).Any()
+                                 IsBooked = (from booked in context.BookedSeats where seat.Id == booked.SeatId  select booked).Any()
+                             };
+                return result.ToList();
+            }
+        }
+
+        public List<SeatDto> GetAllDetailBySalonID(int salonId, int ticketId)
+        {
+            using (var context = new AppDbContext())
+            {
+                var result = from seat in context.Seats.Where(t => t.SalonId == salonId)
+                             select new SeatDto
+                             {
+                                 Id = seat.Id,
+                                 SalonId = seat.SalonId,
+                                 SeatNumber = seat.SeatNumber,
+                                 IsBooked = (from booked in context.BookedSeats where seat.Id == booked.SeatId && booked.TicketId == ticketId select booked).Any()
                              };
                 return result.ToList();
             }
