@@ -28,5 +28,10 @@ namespace DataAccess.Concretes
                 return result.ToList();
             }
         }
+
+        public List<SeatDto> GetAllDetailBySalonID(int salonId, int ticketId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
