@@ -115,7 +115,7 @@ namespace Business.Concretes
             return new ErrorDataResult<List<Ticket>>(null);
         }
 
-        [SecuredOperation("User,Admin,SuperAdmin")]
+        //[SecuredOperation("User,Admin,SuperAdmin")]
         public IDataResult<List<TicketReadDto>> GetAllDetails()
         {
             return new SuccessDataResult<List<TicketReadDto>>(_ticketDal.GetAllDetails());
