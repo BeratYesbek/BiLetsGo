@@ -29,9 +29,5 @@ namespace DataAccess.Concretes
             }
         }
 
-        public List<SeatDto> GetAllDetailBySalonID(int salonId, int ticketId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

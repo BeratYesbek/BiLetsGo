@@ -21,7 +21,6 @@ namespace Business.Abstracts
 
         IDataResult<List<SeatDto>> GetBySalonId(int salonId);
 
-        IDataResult<List<SeatDto>> GetBySalonId(int salonId,int ticketId);
 
 
         IDataResult<List<Seat>> GetAll();

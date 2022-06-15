@@ -57,10 +57,7 @@ namespace Business.Concretes
             return new SuccessDataResult<List<SeatDto>>(_seatDal.GetAllBySalonID(t => t.SalonId == salonId));
         }
 
-        public IDataResult<List<SeatDto>> GetBySalonId(int salonId, int ticketId)
-        {
-            return new SuccessDataResult<List<SeatDto>>(_seatDal.GetAllDetailBySalonID(salonId, ticketId));
-        }
+
 
         [ValidationAspect(typeof(SeatValidator))]
         [SecuredOperation("Admin,SuperAdmin")]

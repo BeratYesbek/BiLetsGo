@@ -14,6 +14,5 @@ namespace DataAccess.Abstracts
     {
         List<SeatDto> GetAllBySalonID(Expression<Func<Seat, bool>> filter);
 
-        List<SeatDto> GetAllDetailBySalonID(int salonId, int ticketId);
     }
 }
