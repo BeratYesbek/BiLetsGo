@@ -17,7 +17,7 @@ namespace DataAccess.Concretes
         {
             using(var context = new AppDbContext())
             {
-                var result = from ticket in context.Tickets.Where(t => t.EventFinishedDate < DateTime.Now) 
+                var result = from ticket in context.Tickets.Where(t => t.EventFinishedDate > DateTime.Now) 
                              join category in context.Categories on ticket.CategoryId equals category.Id
                              join salon in context.Salons on ticket.SalonId equals salon.Id
                              select new TicketReadDto
